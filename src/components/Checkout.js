@@ -1,19 +1,3 @@
-// // Checkout.js
-// import React from 'react';
-
-// const Checkout = () => (
-//   <div className="p-6">
-//     <h2 className="text-3xl font-semibold mb-4">Checkout</h2>
-//     <form className="space-y-4">
-//       <input type="text" placeholder="Full Name" className="w-full p-2 border rounded" required />
-//       <input type="email" placeholder="Email" className="w-full p-2 border rounded" required />
-//       <input type="text" placeholder="Address" className="w-full p-2 border rounded" required />
-//       <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200">Submit Order</button>
-//     </form>
-//   </div>
-// );
-
-// export default Checkout;
 import React, { useState } from 'react';
 
 const Checkout = () => {
@@ -32,9 +16,9 @@ const Checkout = () => {
       return;
     }
 
-    // Submit the order logic here (e.g., API call)
+
     console.log('Order submitted:', { fullName, email, address });
-    // Optionally reset form after submission
+  
     setFullName('');
     setEmail('');
     setAddress('');

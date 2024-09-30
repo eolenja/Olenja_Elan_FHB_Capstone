@@ -21,7 +21,7 @@ const ShoppingCart = () => {
         console.error('Failed to fetch cart items:', error);
         setError(error.message);
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false); 
       }
     };
 
@@ -32,8 +32,8 @@ const ShoppingCart = () => {
    
   };
 
-  if (loading) return <p>Loading cart items...</p>; // Loading state
-  if (error) return <div className="text-red-500">{error}</div>; // Display error if any
+  if (loading) return <p>Loading cart items...</p>;
+  if (error) return <div className="text-red-500">{error}</div>; 
 
   return (
     <div className="p-6">
