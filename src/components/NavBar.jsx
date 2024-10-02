@@ -7,10 +7,10 @@ const NavBar = () => (
       <Link to="/" className="text-xl font-bold">For Heavens Bake!</Link>
       <div>
         <Link to="/products" className="mx-2 hover:text-gray-300">Products</Link>
+        <Link to="/blog" className="mx-2 hover:text-gray-300">Blog</Link> 
         <Link to="/cart" className="mx-2 hover:text-gray-300">Cart</Link>
-        <Link to="/login" className="mx-2 hover:text-gray-300">Login</Link>
-        <Link to="/register" className="mx-2 hover:text-gray-300">Register</Link>
-        <Link to="/about" className="mx-2 hover:text-gray-300">About</Link> {/* Updated link */}
+        <Link to="/auth" className="mx-2 hover:text-gray-300">Login/Register</Link> 
+        <Link to="/about" className="mx-2 hover:text-gray-300">About</Link> 
       </div>
     </div>
   </nav>

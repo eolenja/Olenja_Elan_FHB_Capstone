@@ -1,56 +1,3 @@
-// // src/routes.js
-// import React from 'react';
-// import { Route, Switch } from 'react-router-dom';
-// import HomePage from './HomePage';
-// import ProductCatalog from './ProductCatalog';
-// import ProductDetails from './ProductDetails';
-// import AboutPage from './AboutPage';
-// import ShoppingCart from './ShoppingCart';
-
-// const Routes = () => (
-//   <Switch>
-//     <Route path="/" exact component={HomePage} />
-//     <Route path="/products" exact component={ProductCatalog} />
-//     <Route path="/products/:id" component={ProductDetails} />
-//     <Route path="/about" component={AboutPage} />
-//     <Route path="/cart" component={ShoppingCart} />
-//   </Switch>
-// );
-
-// export default Routes;
-// routes.js
-// import React from 'react';
-// import { Routes, Route } from 'react-router-dom';
-// import HomePage from './HomePage';
-// import ProductCatalog from './ProductCatalog';
-// import ProductDetails from './ProductDetails';
-// import SingleItem from './SingleItem';
-// import AboutPage from './AboutPage';
-// import ShoppingCart from './ShoppingCart';
-// import Checkout from './Checkout';
-// import Login from './Login';
-// import Register from './Register';
-
-// const AppRoutes = () => {
-//   return (
-//     <Routes>
-//       <Route path="/" element={<HomePage />} />
-//       <Route path="/products" element={<ProductCatalog />} />
-//       <Route path="/products/:id" element={<ProductDetails />} />
-//       <Route path="/product/:id" element={<SingleItem />} />
-//       <Route path="/about" element={<AboutPage />} />
-//       <Route path="/cart" element={<ShoppingCart />} />
-//       <Route path="/checkout" element={<Checkout />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/register" element={<Register />} />
-//       {/* Add more routes as necessary */}
-//     </Routes>
-//   );
-// };
-
-// export default AppRoutes;
-
-// routes.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
@@ -60,9 +7,8 @@ import SingleItem from './components/SingleItem';
 import AboutPage from './components/AboutPage';
 import ShoppingCart from './components/ShoppingCart';
 import Checkout from './components/Checkout';
-import Login from './components/Login';
-import Register from './components/Register';
-
+import Auth from './components/Auth'; // Import the combined Auth component
+import Blog from './components/Blog'; // Import the Blog component
 
 const AppRoutes = () => {
   return (
@@ -74,8 +20,8 @@ const AppRoutes = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/cart" element={<ShoppingCart />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/auth" element={<Auth />} /> {/* Route for authentication */}
+      <Route path="/blog" element={<Blog />} /> {/* Add the Blog route */}
       {/* Add more routes as necessary */}
     </Routes>
   );
