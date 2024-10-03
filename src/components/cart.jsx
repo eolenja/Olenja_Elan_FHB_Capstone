@@ -1,29 +1,34 @@
-import React from 'react';
-import { useCart } from './CartContext';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import localInstance from '../api/localInstance';
 
-const Cart = () => {
-    const { cart, addToCart, removeFromCart } = useCart();
+function Cart() {
+    const [cart, setCart] = useState(null);
 
-    const handleAddItem = () => {
-        const newItem = prompt('Enter item name:');
-        if (newItem) {
-            addToCart(newItem);
+    useEffect(() => {
+        fetchCart();
+    }, []);
+
+    const fetchCart = async () => {
+        try {
+            const response = await localInstance.get('/cart');
+            setCart(response.data);
+        } catch (error) {
+            console.error('Error fetching cart:', error);
         }
     };
 
+    if (!cart) return <div>Loading cart...</div>;
+
+    const itemCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+
     return (
         <div>
-            <h1>Your Cart</h1>
-            <button onClick={handleAddItem}>Add Item</button>
-            <ul>
-                {cart.map((item, index) => (
-                    <li key={index}>
-                        {item} <button onClick={() => removeFromCart(item)}>Remove</button>
-                    </li>
-                ))}
-            </ul>
+            <Link to="/cart">
+                Cart ({itemCount} {itemCount === 1 ? 'item' : 'items'})
+            </Link>
         </div>
     );
-};
+}
 
 export default Cart;
