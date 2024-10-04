@@ -8,6 +8,8 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Cart from './components/Cart';
 import CartPage from './components/CartPage';
+import BlogList from './components/BlogList'; // Import BlogList
+import BlogDetail from './components/BlogDetail'; // Import BlogDetail
 import { CartProvider } from './store/CartContext';
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/blogs" element={<BlogList />} /> {/* Add BlogList route */}
+            <Route path="/blogs/:id" element={<BlogDetail />} /> {/* Add BlogDetail route */}
           </Routes>
         </div>
       </Router>

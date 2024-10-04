@@ -1,9 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-/* index.css */
+/* Global Styles */
 body {
-    @apply bg-gray-100; 
-  }
-  
+    @apply bg-amber-800 font-sans leading-normal tracking-normal;
+}
+
+h1, h2, h3, h4 {
+    @apply text-yellow-50 font-bold;
+}
+
+p {
+    @apply text-gray-600;
+}
+
+.container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}

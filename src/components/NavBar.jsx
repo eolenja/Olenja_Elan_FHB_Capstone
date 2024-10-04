@@ -11,6 +11,7 @@ const Navbar = () => {
           <li><Link to="/menu" className="text-white hover:text-gray-200">Menu</Link></li>
           <li><Link to="/login" className="text-white hover:text-gray-200">Login</Link></li>
           <li><Link to="/register" className="text-white hover:text-gray-200">Register</Link></li>
+          <li><Link to="/blogs" className="text-white hover:text-gray-200">Blog</Link></li> {/* Add Blog link */}
         </ul>
       </div>
     </nav>

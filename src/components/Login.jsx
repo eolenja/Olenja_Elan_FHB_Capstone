@@ -17,7 +17,7 @@ function Login() {
       });
       console.log('Login successful:', response.data);
       localStorage.setItem('token', response.data.token);
-      navigate('/menu');
+      navigate('/dashboard'); // Redirect to Dashboard after login
     } catch (error) {
       console.error('Login failed:', error.response?.data || error.message);
       setError(error.response?.data?.message || 'An error occurred during login');
