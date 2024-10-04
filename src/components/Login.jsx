@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await localInstance.post('/auth/login', {
+      const response = await localInstance.post('api/User/login', {
         username: username,
         password: password
       });
