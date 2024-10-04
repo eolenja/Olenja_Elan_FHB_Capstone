@@ -17,7 +17,7 @@ public class BakeryItem {
     private double price;
     private String imageUrl; // URL for the product image
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
