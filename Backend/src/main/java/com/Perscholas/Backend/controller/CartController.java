@@ -11,20 +11,32 @@ import java.util.List;
 @RequestMapping("/api/cart")
 public class CartController {
     @Autowired
-    private CartService cartService; // Use CartService to manage cart items
+    private CartService cartService;
 
     @PostMapping("/add")
     public String addItemToCart(@RequestBody CartItem item) {
-        cartService.addItem(item); // Use the service to add the item
+        cartService.addItem(item);
         return "Item added to cart";
     }
 
-    @GetMapping // Change this to match the endpoint you want
+    @GetMapping("/your/cart")
     public List<CartItem> getCartItems() {
-        return cartService.getCartItems(); // Use the service to get cart items
+        return cartService.getCartItems();
     }
 
-    @DeleteMapping("/clear") // Optional: Endpoint to clear the cart
+    @PutMapping("/update")
+    public String updateCartItem(@RequestBody CartItem item) {
+        cartService.updateItem(item);
+        return "Item updated";
+    }
+
+    @DeleteMapping("/remove/{productId}")
+    public String removeItemFromCart(@PathVariable Long productId) {
+        cartService.removeItem(productId);
+        return "Item removed from cart";
+    }
+
+    @DeleteMapping("/clear")
     public String clearCart() {
         cartService.clearCart();
         return "Cart cleared";
