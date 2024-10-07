@@ -3,8 +3,8 @@ import ReviewCarousel from './ReviewCarousel';
 
 const products = [
   { id: 1, name: 'Chocolate Cake', image: 'src/Images/chocolateCake.JPG' },
-  { id: 2, name: 'Croissant', image: '/Images/croissant.jpg' },
-  { id: 3, name: 'Blueberry Muffin', image: '/Images/blueberry-muffin.jpg' },
+  { id: 2, name: 'Croissant', image: 'src/Images/croissant.jpg' },
+  { id: 3, name: 'Blueberry Muffin', image: '/src/images/bakery-style-blueberry-muffins-featured-2.jpg' },
 ];
 
 const blogPosts = [

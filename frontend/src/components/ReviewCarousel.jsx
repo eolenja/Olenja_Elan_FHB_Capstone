@@ -35,7 +35,7 @@ const ReviewCarousel = () => {
       <h2 className="text-center text-brown-600 text-2xl font-semibold mb-5">User Reviews</h2>
       <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {reviews.map((review) => (
-          <div className="min-w-full p-5 bg-brown-600 text-brown-100 rounded-lg shadow-md" key={review.id}>
+          <div className="min-w-full p-5 bg-brown-600 text-red-50 rounded-lg shadow-md" key={review.id}>
             <p className="italic mb-2">"{review.text}"</p>
             <p className="text-right font-bold">- {review.author}</p>
           </div>

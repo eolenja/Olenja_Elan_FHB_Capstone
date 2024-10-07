@@ -13,7 +13,7 @@ function Menu() {
 
   const fetchBakeryItems = async () => {
     try {
-      const response = await localInstance.get('/bakery-items');
+      const response = await localInstance.get('/bakery-items'); // Ensure this path is correct
       setBakeryItems(response.data);
       setLoading(false);
     } catch (err) {
