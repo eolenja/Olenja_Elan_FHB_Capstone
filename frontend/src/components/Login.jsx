@@ -25,7 +25,8 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} style={{ maxWidth: '400px', margin: '50px auto', padding: '30px', border: '1px solid #ddd', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', backgroundColor: '#f9f9f9' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Login</h2>
       <input
         type="text"
         id="username"
@@ -34,6 +35,7 @@ function Login() {
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Username"
         required
+        style={{ width: '100%', padding: '12px', marginBottom: '15px', borderRadius: '5px', border: '1px solid #ccc', fontSize: '16px' }}
       />
       <input
         type="password"
@@ -43,9 +45,15 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
         required
+        style={{ width: '100%', padding: '12px', marginBottom: '15px', borderRadius: '5px', border: '1px solid #ccc', fontSize: '16px' }}
       />
-      {error && <div style={{color: 'red'}}>{error}</div>}
-      <button type="submit">Login</button>
+      {error && <div style={{ color: 'red', marginBottom: '15px', textAlign: 'center' }}>{error}</div>}
+      <button type="submit" style={{ width: '100%', padding: '12px', backgroundColor: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', fontSize: '16px', cursor: 'pointer', transition: 'background-color 0.3s' }}
+        onMouseOver={(e) => e.target.style.backgroundColor = '#0056b3'}
+        onMouseOut={(e) => e.target.style.backgroundColor = '#007BFF'}
+      >
+        Login
+      </button>
     </form>
   );
 }

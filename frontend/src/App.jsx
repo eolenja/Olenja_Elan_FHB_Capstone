@@ -6,10 +6,10 @@ import Menu from './components/Menu';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-import Cart from './components/Cart';
 import CartPage from './components/CartPage';
 import BlogList from './components/BlogList'; // Import BlogList
 import BlogDetail from './components/BlogDetail'; // Import BlogDetail
+
 import { CartProvider } from './store/CartContext';
 
 function App() {

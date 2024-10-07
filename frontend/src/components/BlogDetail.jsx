@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import localInstance from '../api/localInstance';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 
 function BlogDetail() {
-    const { id } = useParams();
-    const [blog, setBlog] = useState(null);
-    const [comment, setComment] = useState('');
-    const [loading, setLoading] = useState(true); // Added loading state
-    const [error, setError] = useState('');
-
-    useEffect(() => {
-        const fetchBlog = async () => {
-            try {
-                const response = await localInstance.get(`/api/blogs/${id}`);
-                setBlog(response.data);
-            } catch (error) {
-                setError('Failed to load blog post.'); // Improved error handling
-            } finally {
-                setLoading(false); // Set loading to false after fetching
-            }
-        };
-        fetchBlog();
-    }, [id]);
-
-    const handleCommentSubmit = async (e) => {
-        e.preventDefault();
-        await localInstance.post(`/api/blogs/${id}/comments`, { content: comment, author: 'Anonymous' });
-        setComment('');
-        // Optionally, refresh the blog details to show the new comment
+    // Static bakery blog post data
+    const blog = {
+        title: 'The Art of Baking Bread',
+        content: 'Baking bread is both an art and a science. It requires precision, patience, and a love for the craft...',
+        comments: [
+            { id: 1, author: 'Alice', content: 'Great insights on bread baking!' },
+            { id: 2, author: 'Bob', content: 'I love the tips on sourdough.' }
+        ]
     };
 
-    if (loading) return <div>Loading...</div>; // Show loading state
-    if (error) return <div>{error}</div>;
+    const [comment, setComment] = React.useState('');
+
+    const handleCommentSubmit = (e) => {
+        e.preventDefault();
+        // Since this is a static page, we won't actually submit the comment
+        console.log('Comment submitted:', comment);
+        setComment('');
+    };
 
     return (
         <div>

@@ -9,12 +9,15 @@ function Menu() {
 
   useEffect(() => {
     fetchBakeryItems();
-  }, []);
+  }, []); // Ensure this is an empty array to run only once
 
   const fetchBakeryItems = async () => {
     try {
-      const response = await localInstance.get('/bakery-items'); // Ensure this path is correct
-      setBakeryItems(response.data);
+      setBakeryItems([]); // Reset state before fetching
+      const response = await localInstance.get('/bakery-items');
+      const uniqueItems = Array.from(new Set(response.data.map(item => item.id)))
+        .map(id => response.data.find(item => item.id === id));
+      setBakeryItems(uniqueItems);
       setLoading(false);
     } catch (err) {
       console.error('Error fetching bakery items:', err.response || err);
