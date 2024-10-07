@@ -1,7 +1,6 @@
 import React from 'react';
 
 function BlogDetail() {
-    // Static bakery blog post data
     const blog = {
         title: 'The Art of Baking Bread',
         content: 'Baking bread is both an art and a science. It requires precision, patience, and a love for the craft...',
@@ -15,7 +14,6 @@ function BlogDetail() {
 
     const handleCommentSubmit = (e) => {
         e.preventDefault();
-        // Since this is a static page, we won't actually submit the comment
         console.log('Comment submitted:', comment);
         setComment('');
     };

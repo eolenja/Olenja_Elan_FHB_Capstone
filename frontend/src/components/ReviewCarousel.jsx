@@ -26,7 +26,7 @@ const ReviewCarousel = () => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(nextReview, 5000); // Change every 5 seconds
+    const intervalId = setInterval(nextReview, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
