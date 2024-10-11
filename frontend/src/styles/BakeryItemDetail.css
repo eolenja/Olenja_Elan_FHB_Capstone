@@ -1,4 +1,4 @@
-/* src/components/BakeryItemDetail.css */
+/* src/components/BakeryItemDetail.css 
 .bakery-item-detail {
     max-width: 600px;
     margin: 20px auto;
@@ -16,7 +16,7 @@
 
 .add-to-cart-button {
     background-color: #4CAF50; /* Green */
-    color: white;
+    /* color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -25,4 +25,4 @@
 
 .add-to-cart-button:hover {
     background-color: #45a049;
-}
+} */ 
