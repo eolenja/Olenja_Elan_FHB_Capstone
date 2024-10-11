@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import localInstance from '../api/localInstance';
-import '../styles/Menu.css';
+
 
 function Menu() {
   const [bakeryItems, setBakeryItems] = useState([]);

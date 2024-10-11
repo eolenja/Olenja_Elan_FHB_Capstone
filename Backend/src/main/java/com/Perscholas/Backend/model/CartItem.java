@@ -1,6 +1,11 @@
 package com.Perscholas.Backend.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class CartItem {
+    @Id
     private String id; // Item ID
     private String name; // Item name
     private int quantity; // Quantity of the item

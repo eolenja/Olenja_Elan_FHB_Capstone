@@ -11,6 +11,7 @@ import BlogList from './components/BlogList';
 import BlogDetail from './components/BlogDetail';
 import { CartProvider } from './store/CartContext';
 import Cart from './components/Cart';
+import { generateToken } from './Utils/tokenUtils';
 
 function App() {
   return (

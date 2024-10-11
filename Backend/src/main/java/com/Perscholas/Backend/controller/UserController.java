@@ -18,27 +18,40 @@ public class UserController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    // User Registration
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User registeredUser = userService.register(user);
-        return ResponseEntity.ok(registeredUser);
+        try {
+            User registeredUser = userService.register(user);
+            return ResponseEntity.ok(registeredUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null); // Handle registration errors
+        }
     }
 
+    // User Login
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody User user) {
+        System.out.println("Attempting to log in user: " + user.getUsername());
         User authenticatedUser = userService.authenticate(user.getUsername(), user.getPassword());
+
         if (authenticatedUser != null) {
+            // Generate a JWT token for session management
             String token = jwtUtil.generateToken(authenticatedUser.getUsername());
+            System.out.println("Token generated for user: " + authenticatedUser.getUsername());
             return ResponseEntity.ok(new LoginResponse(token)); // Return the token in a structured response
         }
-        return ResponseEntity.status(401).body(null); // Unauthorized
+
+        System.out.println("Authentication failed for user: " + user.getUsername());
+        return ResponseEntity.status(401).body(new LoginResponse("Invalid username or password")); // Unauthorized with message
     }
 
+    // Get Current User
     @GetMapping("/me")
     public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal User user) {
         if (user != null) {
-            return ResponseEntity.ok(user);
+            return ResponseEntity.ok(user); // Return the authenticated user's info
         }
-        return ResponseEntity.status(401).body(null);
+        return ResponseEntity.status(401).body(null); // Unauthorized
     }
 }
