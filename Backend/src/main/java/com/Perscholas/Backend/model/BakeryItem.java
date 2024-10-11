@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
-
 @Entity
 public class BakeryItem {
     @Id
@@ -17,7 +15,20 @@ public class BakeryItem {
     private double price;
     private String imageUrl; // URL for the product image
 
+    // Default constructor
+    public BakeryItem() {
+    }
 
+    // Parameterized constructor
+    public BakeryItem(Long id, String name, String description, double price, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }

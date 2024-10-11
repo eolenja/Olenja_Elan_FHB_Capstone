@@ -6,14 +6,17 @@ import Menu from './components/Menu';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-// import CartPage from './components/CartPage';
 import BlogList from './components/BlogList';
 import BlogDetail from './components/BlogDetail';
 import { CartProvider } from './store/CartContext';
 import Cart from './components/Cart';
-import { generateToken } from './Utils/tokenUtils';
+// Remove the generateToken import
+// import { generateToken } from './Utils/tokenUtils.jsx';
 
 function App() {
+  // Remove the token generation
+  // const token = generateToken(); // {{ edit_1 }}
+  
   return (
     <CartProvider>
       <Router>

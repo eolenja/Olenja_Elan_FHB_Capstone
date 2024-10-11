@@ -3,7 +3,6 @@ package com.Perscholas.Backend.controller;
 import com.Perscholas.Backend.model.User;
 import com.Perscholas.Backend.model.LoginResponse; // Import the LoginResponse class
 import com.Perscholas.Backend.service.UserService;
-import com.Perscholas.Backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
 
     // User Registration
     @PostMapping("/register")
@@ -36,10 +32,12 @@ public class UserController {
         User authenticatedUser = userService.authenticate(user.getUsername(), user.getPassword());
 
         if (authenticatedUser != null) {
-            // Generate a JWT token for session management
-            String token = jwtUtil.generateToken(authenticatedUser.getUsername());
-            System.out.println("Token generated for user: " + authenticatedUser.getUsername());
-            return ResponseEntity.ok(new LoginResponse(token)); // Return the token in a structured response
+            // Instead of generating a JWT token, you can set a session attribute
+            // For example, using HttpSession to store user information
+            // HttpSession session = request.getSession();
+            // session.setAttribute("user", authenticatedUser);
+            System.out.println("User logged in: " + authenticatedUser.getUsername());
+            return ResponseEntity.ok(new LoginResponse("Login successful")); // Return a success message
         }
 
         System.out.println("Authentication failed for user: " + user.getUsername());

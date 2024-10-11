@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import localInstance from '../api/localInstance';
-
+import axios from 'axios'; // Assuming axios is used for fetching
 
 function Menu() {
   const [bakeryItems, setBakeryItems] = useState([]);
@@ -8,23 +8,27 @@ function Menu() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchBakeryItems();
-  }, []); // Ensure this is an empty array to run only once
+    const fetchBakeryItems = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/bakery-items', {
+          withCredentials: true,
+        });
+        if (Array.isArray(response.data)) {
+          setBakeryItems(response.data);
+        } else {
+          console.error('Unexpected response format:', response.data);
+          setError('Unexpected response format');
+        }
+      } catch (error) {
+        console.error('Error fetching bakery items:', error.message);
+        setError('Failed to fetch bakery items');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const fetchBakeryItems = async () => {
-    try {
-      setBakeryItems([]); // Reset state before fetching
-      const response = await localInstance.get('/bakery-items');
-      const uniqueItems = Array.from(new Set(response.data.map(item => item.id)))
-        .map(id => response.data.find(item => item.id === id));
-      setBakeryItems(uniqueItems);
-      setLoading(false);
-    } catch (err) {
-      console.error('Error fetching bakery items:', err.response || err);
-      setError('Failed to fetch bakery items: ' + (err.response?.data?.message || err.message));
-      setLoading(false);
-    }
-  };
+    fetchBakeryItems();
+  }, []);
 
   const addToCart = async (bakeryItemId) => {
     try {

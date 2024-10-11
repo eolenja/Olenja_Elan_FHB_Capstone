@@ -19,10 +19,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Temporarily disable CSRF for testing
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll() // Allow all requests for simplicity
-                );
+                        .requestMatchers("/api/**").permitAll() // Allow all API requests
+                        .anyRequest().authenticated() // Require authentication for other requests
+                )
+                .formLogin(form -> form.disable()) // Disable form login
+                .logout(logout -> logout.disable()); // Disable logout
 
         return http.build();
     }
