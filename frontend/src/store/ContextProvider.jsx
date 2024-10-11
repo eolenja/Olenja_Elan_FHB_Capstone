@@ -1,11 +1,11 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import { getProducts, getCartItems } from '../api';
+import { getProducts, getOrders } from '../api'; // Update import
 
 export const StoreContext = createContext();
 
 const initialState = {
   products: [],
-  cart: [],
+  orders: [], // Update state
   user: JSON.parse(localStorage.getItem('user')) || null,
 };
 
@@ -13,28 +13,16 @@ const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_PRODUCTS':
       return { ...state, products: action.payload };
-    case 'SET_CART':
-      return { ...state, cart: action.payload };
-    case 'ADD_TO_CART':
-      return { ...state, cart: [...state.cart, action.payload] };
-    case 'UPDATE_CART_ITEM':
-      return {
-        ...state,
-        cart: state.cart.map(item =>
-          item.id === action.payload.id ? { ...item, ...action.payload } : item
-        ),
-      };
-    case 'REMOVE_FROM_CART':
-      return {
-        ...state,
-        cart: state.cart.filter(item => item.id !== action.payload),
-      };
+    case 'SET_ORDERS': // Update action
+      return { ...state, orders: action.payload };
+    case 'ADD_ORDER': // New action
+      return { ...state, orders: [...state.orders, action.payload] };
     case 'SET_USER':
-      console.log('Setting user:', action.payload); // Debugging line
+      console.log('Setting user:', action.payload);
       localStorage.setItem('user', JSON.stringify(action.payload));
       return { ...state, user: action.payload };
     case 'LOGOUT':
-      console.log('Logging out user'); // Debugging line
+      console.log('Logging out user');
       localStorage.removeItem('user');
       return { ...state, user: null };
     default:
@@ -48,12 +36,12 @@ export const StoreProvider = ({ children }) => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const [products, cartItems] = await Promise.all([
+        const [products, orders] = await Promise.all([
           getProducts(),
-          getCartItems(),
+          getOrders(), // Update API call
         ]);
         dispatch({ type: 'SET_PRODUCTS', payload: products });
-        dispatch({ type: 'SET_CART', payload: cartItems });
+        dispatch({ type: 'SET_ORDERS', payload: orders }); // Update dispatch
       } catch (error) {
         console.error('Error fetching initial data:', error);
       }
