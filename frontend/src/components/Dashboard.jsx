@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import localInstance from '../api/localInstance';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -19,11 +21,15 @@ const Dashboard = () => {
         setOrders(ordersResponse.data);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
+        if (error.response && error.response.status === 401) {
+          console.error('Unauthorized access - redirecting to login');
+          navigate('/login'); // Redirect to login if unauthorized
+        }
       }
     };
 
     fetchDashboardData();
-  }, []);
+  }, [navigate]); // Add navigate to dependencies
 
   return (
     <div className="container mx-auto mt-10">

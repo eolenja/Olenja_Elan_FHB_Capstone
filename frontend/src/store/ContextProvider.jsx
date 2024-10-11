@@ -30,9 +30,11 @@ const reducer = (state, action) => {
         cart: state.cart.filter(item => item.id !== action.payload),
       };
     case 'SET_USER':
+      console.log('Setting user:', action.payload); // Debugging line
       localStorage.setItem('user', JSON.stringify(action.payload));
       return { ...state, user: action.payload };
     case 'LOGOUT':
+      console.log('Logging out user'); // Debugging line
       localStorage.removeItem('user');
       return { ...state, user: null };
     default:

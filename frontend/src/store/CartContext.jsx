@@ -12,7 +12,7 @@ export const CartProvider = ({ children }) => {
 
     const fetchCart = async () => {
         try {
-            const response = await localInstance.get('/cart'); // Corrected path
+            const response = await localInstance.get('/cart/your/cart'); // Updated path
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart:', error);
@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = async (item) => {
         try {
-            const response = await localInstance.post('/cart/add', item); // Corrected path
+            const response = await localInstance.post('/cart/add', item); // Updated path
             setCart(response.data);
         } catch (error) {
             console.error('Error adding item to cart:', error);
@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
 
     const removeFromCart = async (itemId) => {
         try {
-            const response = await localInstance.delete(`cart/remove/${itemId}`); // Corrected path
+            const response = await localInstance.delete(`/cart/remove/${itemId}`); // Updated path
             setCart(response.data);
         } catch (error) {
             console.error('Error removing item from cart:', error);
