@@ -1,65 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import localInstance from '../api/localInstance';
-import axios from 'axios'; // Assuming axios is used for fetching
+import React, { useEffect, useState } from 'react';
 
-function Menu() {
+const Menu = () => {
   const [bakeryItems, setBakeryItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchBakeryItems = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/bakery-items', {
-          withCredentials: true,
-        });
-        if (Array.isArray(response.data)) {
-          setBakeryItems(response.data);
-        } else {
-          console.error('Unexpected response format:', response.data);
-          setError('Unexpected response format');
+        const response = await fetch('/api/bakery-items');
+        if (!response.ok) {
+          throw new Error('Failed to fetch bakery items: ' + response.statusText);
         }
+        const data = await response.json();
+        setBakeryItems(data);
       } catch (error) {
-        console.error('Error fetching bakery items:', error.message);
-        setError('Failed to fetch bakery items');
-      } finally {
-        setLoading(false);
+        setError(error.message);
+        console.error('Error fetching bakery items:', error);
       }
     };
 
     fetchBakeryItems();
   }, []);
 
-  const addToCart = async (bakeryItemId) => {
-    try {
-      const response = await localInstance.post('/cart/add', { bakeryItemId });
-      console.log('Item added to cart:', response.data);
-      alert('Item added to cart!');
-    } catch (err) {
-      console.error('Error adding item to cart:', err.response || err);
-      alert('Failed to add item to cart: ' + (err.response?.data?.message || err.message));
-    }
-  };
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <div className="menu">
-      <h2>Our Menu</h2>
-      <div className="bakery-items">
+    <div>
+      <h1>Menu</h1>
+      <ul>
         {bakeryItems.map(item => (
-          <div key={item.id} className="bakery-item">
-            <img src={item.imageUrl} alt={item.name} />
-            <h3>{item.name}</h3>
+          <li key={item.id}>
+            <h2>{item.name}</h2>
             <p>{item.description}</p>
             <p>Price: ${item.price.toFixed(2)}</p>
-            <button onClick={() => addToCart(item.id)}>Add to Cart</button>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
-}
+};
 
 export default Menu;

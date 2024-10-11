@@ -1,10 +1,8 @@
-// src/components/BakeryItemDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import localInstance from '../api/localInstance';
 
-function BakeryItemDetail() {
-    const { id } = useParams(); // Get the bakery item ID from the URL
+const BakeryItemDetails = () => {
+    const { id } = useParams(); // Get the ID from the URL
     const [bakeryItem, setBakeryItem] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,32 +10,38 @@ function BakeryItemDetail() {
     useEffect(() => {
         const fetchBakeryItem = async () => {
             try {
-                const response = await localInstance.get(`/api/bakery-items/${id}`); // Fetch the bakery item by ID
-                setBakeryItem(response.data);
-            } catch (error) {
-                console.error('Error fetching bakery item:', error);
-                setError('Failed to load bakery item.');
+                const response = await fetch(`/api/bakery-items/${id}`);
+                if (!response.ok) {
+                    throw new Error('Item not found');
+                }
+                const data = await response.json();
+                setBakeryItem(data);
+            } catch (err) {
+                setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
+
         fetchBakeryItem();
     }, [id]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
-    if (!bakeryItem) return <div>Bakery item not found.</div>;
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <div className="bakery-item-detail">
+        <div>
             <h1>{bakeryItem.name}</h1>
-            <img src={bakeryItem.imageUrl} alt={bakeryItem.name} className="bakery-item-image" />
+            <img src={bakeryItem.imageUrl} alt={bakeryItem.name} />
             <p>{bakeryItem.description}</p>
             <p>Price: ${bakeryItem.price.toFixed(2)}</p>
-            {/* Add any additional functionality, like adding to cart */}
-            <button className="add-to-cart-button">Add to Cart</button>
         </div>
     );
-}
+};
 
-export default BakeryItemDetail;
+export default BakeryItemDetails;

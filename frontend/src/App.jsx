@@ -8,6 +8,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import BlogList from './components/BlogList';
 import BlogDetail from './components/BlogDetail';
+import BakeryItemDetails from './components/BakeryItemDetail'; // Import the BakeryItemDetails component
 import { CartProvider } from './store/CartContext';
 import Cart from './components/Cart';
 // Remove the generateToken import
@@ -31,6 +32,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/blogs" element={<BlogList />} />
             <Route path="/blogs/:id" element={<BlogDetail />} />
+            <Route path="/bakery-items/:id" element={<BakeryItemDetails />} /> {/* Add this line */}
           </Routes>
         </div>
       </Router>
