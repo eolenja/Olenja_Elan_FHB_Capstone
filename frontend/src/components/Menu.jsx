@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import localInstance from '../api/localInstance';
 
 const Menu = () => {
   const [bakeryItems, setBakeryItems] = useState([]);
@@ -7,12 +8,8 @@ const Menu = () => {
   useEffect(() => {
     const fetchBakeryItems = async () => {
       try {
-        const response = await fetch('/api/bakery-items');
-        if (!response.ok) {
-          throw new Error('Failed to fetch bakery items: ' + response.statusText);
-        }
-        const data = await response.json();
-        setBakeryItems(data);
+        const response = await localInstance.get('/bakery-items');
+        setBakeryItems(response.data);
       } catch (error) {
         setError(error.message);
         console.error('Error fetching bakery items:', error);
@@ -28,14 +25,10 @@ const Menu = () => {
 
   return (
     <div>
-      <h1>Menu</h1>
+      <h1>Bakery Items</h1>
       <ul>
         {bakeryItems.map(item => (
-          <li key={item.id}>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <p>Price: ${item.price.toFixed(2)}</p>
-          </li>
+          <li key={item.id}>{item.name} - ${item.price.toFixed(2)}</li>
         ))}
       </ul>
     </div>

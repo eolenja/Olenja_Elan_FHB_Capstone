@@ -8,17 +8,13 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import BlogList from './components/BlogList';
 import BlogDetail from './components/BlogDetail';
-import { CartProvider } from './store/CartContext';
-import Cart from './components/Cart';
-// Remove the generateToken import
-// import { generateToken } from './Utils/tokenUtils.jsx';
+import Orders from './components/Orders'; // Import Orders component
+import { OrdersProvider } from './store/OrdersProvider'; // Correct import path
+import BakeryItemDetails from './components/BakeryItemsDetail'; // Ensure the path and name are correct
 
 function App() {
-  // Remove the token generation
-  // const token = generateToken(); // {{ edit_1 }}
-  
   return (
-    <CartProvider>
+    <OrdersProvider> {/* Use OrdersProvider instead of CartProvider */}
       <Router>
         <div className="App">
           <NavBar />
@@ -28,14 +24,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<Orders />} /> {/* Update route */}
             <Route path="/blogs" element={<BlogList />} />
             <Route path="/blogs/:id" element={<BlogDetail />} />
             <Route path="/bakery-items/:id" element={<BakeryItemDetails />} />
           </Routes>
         </div>
       </Router>
-    </CartProvider>
+    </OrdersProvider>
   );
 }
 
