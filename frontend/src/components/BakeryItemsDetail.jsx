@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import localInstance from '../api/localInstance'; // Import localInstance
 
 const BakeryItemDetails = () => {
     const { id } = useParams(); // Get the ID from the URL
@@ -10,11 +11,8 @@ const BakeryItemDetails = () => {
     useEffect(() => {
         const fetchBakeryItem = async () => {
             try {
-                const response = await fetch(`/api/bakery-items/${id}`);
-                if (!response.ok) {
-                    throw new Error('Item not found');
-                }
-                const data = await response.json();
+                const response = await localInstance.get(`/bakery-items/${id}`); // Use localInstance
+                const data = response.data;
                 setBakeryItem(data);
             } catch (err) {
                 setError(err.message);

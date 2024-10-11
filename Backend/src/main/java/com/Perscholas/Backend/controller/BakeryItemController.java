@@ -27,14 +27,6 @@ public class BakeryItemController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // New method to get bakery item details
-    @GetMapping("/details/{id}")
-    public ResponseEntity<BakeryItem> getBakeryItemDetails(@PathVariable Long id) {
-        return bakeryItemService.getBakeryItemById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     @PostMapping
     public BakeryItem createBakeryItem(@RequestBody BakeryItem bakeryItem) {
         return bakeryItemService.createBakeryItem(bakeryItem);
